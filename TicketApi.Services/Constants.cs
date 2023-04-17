@@ -1,4 +1,4 @@
-﻿namespace TicketApi.Tests
+﻿namespace TicketApi.Services
 {
     static class Constants
     {

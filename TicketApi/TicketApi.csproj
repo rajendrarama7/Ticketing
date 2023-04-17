@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TicketApi.Entities\TicketApi.Entities.csproj" />
+    <ProjectReference Include="..\TicketApi.Services\TicketApi.Services.csproj" />
+  </ItemGroup>
+
 </Project>

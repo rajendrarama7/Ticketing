@@ -1,3 +1,6 @@
+using TicketApi.Services;
+using TicketApi.Services.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<ISeatReservation, SeatReservationService>();
+builder.Services.AddTransient<ITicketPayment, TicketPaymentService>();
+builder.Services.AddTransient<IValidation, ValidationService>();
 
 var app = builder.Build();
 
