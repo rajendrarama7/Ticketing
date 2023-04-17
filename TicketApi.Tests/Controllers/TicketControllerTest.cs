@@ -35,7 +35,7 @@ namespace TicketApi.Tests.Controllers
             _mockValidation.Setup(x => x.ValidNumberOfTickets(ticketTypeDTO)).Returns(false);
             
             var sut = CreateSut();
-            var output = await sut.Get(ticketTypeDTO);
+            var output = await sut.BookTickets(ticketTypeDTO);
             
             output.Should().NotBeNull().And.Subject.Should().BeOfType<BadRequestObjectResult>();
 
@@ -48,7 +48,7 @@ namespace TicketApi.Tests.Controllers
             _mockValidation.Setup(x => x.IsAdultAccompanied(ticketTypeDTO.Adult)).Returns(false);
             
             var sut = CreateSut();
-            var output = await sut.Get(ticketTypeDTO);
+            var output = await sut.BookTickets(ticketTypeDTO);
             
             output.Should().NotBeNull().And.Subject.Should().BeOfType<BadRequestObjectResult>();
 
@@ -63,7 +63,7 @@ namespace TicketApi.Tests.Controllers
             _mockTicketPayment.Setup(x => x.MakePayment(ticketTypeDTO)).ReturnsAsync(new PaymentConfirmation { Status = false});
             
             var sut = CreateSut();
-            var output = await sut.Get(ticketTypeDTO);
+            var output = await sut.BookTickets(ticketTypeDTO);
             
             output.Should().NotBeNull().And.Subject.Should().BeOfType<BadRequestObjectResult>();
         }
@@ -78,7 +78,7 @@ namespace TicketApi.Tests.Controllers
             _mockSeatReservation.Setup(x => x.ReserveSeats(ticketTypeDTO)).ReturnsAsync(new SeatConfirmation { Status = true, Message = "Reservation" });
             
             var sut = CreateSut();
-            var output = await sut.Get(ticketTypeDTO);
+            var output = await sut.BookTickets(ticketTypeDTO);
             
             output.Should().NotBeNull().And.Subject.Should().BeOfType<OkObjectResult>().Which.Value.Should().Be("Payment and Reservation");
         }
@@ -93,7 +93,7 @@ namespace TicketApi.Tests.Controllers
             _mockSeatReservation.Setup(x => x.ReserveSeats(ticketTypeDTO)).ReturnsAsync(new SeatConfirmation { Status = false, Message = "Reservation" });
             
             var sut = CreateSut();
-            var output = await sut.Get(ticketTypeDTO);
+            var output = await sut.BookTickets(ticketTypeDTO);
             
             output.Should().NotBeNull().And.Subject.Should().BeOfType<BadRequestObjectResult>();
         }

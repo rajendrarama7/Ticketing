@@ -20,10 +20,10 @@ namespace TicketApi.Controllers
             _validationService = validationService ?? throw new ArgumentNullException(nameof(validationService));
         }
 
-        [HttpGet(Name = "Tickets")]
+        [HttpPost(Name = "Tickets")]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Get([FromQuery]TicketTypeDTO ticketTypeDTO)
+        public async Task<IActionResult> BookTickets([FromQuery]TicketTypeDTO ticketTypeDTO)
         {
             if (!_validationService.ValidNumberOfTickets(ticketTypeDTO) || !_validationService.IsAdultAccompanied(ticketTypeDTO.Adult))
             {
